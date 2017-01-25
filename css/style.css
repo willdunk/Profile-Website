@@ -180,6 +180,60 @@ a:link, a:visited, a:hover, a:active
   	border-style: solid;
   	border-color: #334364;
   	margin: 10px;
+  	cursor: pointer;
+}
+
+#photo-window
+{
+	position: absolute;
+	visibility: hidden;
+	opacity: 0;
+	z-index: 4;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+#fullsizeimage
+{
+	max-width: 75%;
+	max-height: 90%;
+	position: absolute;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#exitfullsizeimage
+{
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	width: 30px;
+	cursor: pointer;
+}
+
+#backfullsizeimage
+{
+	width:45px;
+	height: 45px;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-left: 50px;
+	cursor: pointer;
+}
+
+#nextfullsizeimage
+{
+	width:45px;
+	height: 45px;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-right: 50px;
+	cursor: pointer;
 }
 
 /*nonspreadable elements go here*/

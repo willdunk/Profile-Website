@@ -63,12 +63,12 @@ profileApp.controller("PhotographyController", ['$scope', '$http', '$sce',
 function($scope, $http, $sce)
 {
 	$scope.photolist = {data:null};
+	$scope.photo = {data:null};
 	$scope.buildPhotoList = function()
 	{
 		$http.get("http://api.williamdunkerley.com/photography/featured")
 		.success(function(data)
 		{
-			console.log(data);
 			$scope.photolist.data = [];
 			for (var i = 0; i < data.length; i++)
 			{
@@ -79,8 +79,26 @@ function($scope, $http, $sce)
 		})
 		.error(function(data)
 		{
-			console.log(error)
+			console.log(error);
 		});
+	}
+
+	$scope.activatePhotoWindow = function(_index, _photolist)
+	{
+		$("#shadowbox").fadeTo(400, .90);
+		$("#photo-window").css("visibility", "visible");
+		$("#photo-window").fadeTo(400, 1);
+		$scope.photo.data = _photolist[_index].filepath;
+	}
+
+	$scope.deactivatePhotoWindow = function()
+	{
+		$("#shadowbox").fadeOut(400);
+		$("#photo-window").fadeOut(400, function()
+		{
+			$("#photo-window").css("visibility", "visible");
+		});
+		$scope.photo.data = "http://localhost/images/loading.svg";
 	}
 
 	$scope.trustUrl = function(_url)

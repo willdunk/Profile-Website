@@ -32,10 +32,17 @@
 			</div>
 		</section>
 		<section id="content-section">
-			<!-- <img id="isolated-portrait" class="nonspreadable" src="../images/isolated/1.PNG"></img> -->
-			<div id="content-wrapper">
-				<div id="photography-wrapper" ng-app="profileApp" ng-controller="PhotographyController" ng-init="buildPhotoList()">
-					<img ng-repeat="photo in photolist.data" ng-src="{{trustUrl(photo.thumbnail)}}">
+			<div id="content-wrapper" ng-app="profileApp" ng-controller="PhotographyController">
+				<div id="photo-window">
+					<img id="exitfullsizeimage" class="icons" ng-click="deactivatePhotoWindow()" src="../images/icons/circle_delete.png">
+					<img id="backfullsizeimage" class="icons" src="../images/icons/arrow_left.png">
+
+					<img id="fullsizeimage" ng-src="{{photo.data}}">
+
+					<img id="nextfullsizeimage" class="icons" src="../images/icons/arrow_right.png">
+				</div>
+				<div id="photography-wrapper" ng-init="buildPhotoList()">
+					<img ng-repeat="photo in photolist.data track by $index" ng-click="activatePhotoWindow($index, photolist.data)" ng-src="{{trustUrl(photo.thumbnail)}}">
 				</div>	
 			</div>
 		</section>
