@@ -64,6 +64,7 @@ function($scope, $http, $sce)
 {
 	$scope.photolist = {data:null};
 	$scope.photo = {data:null};
+	$scope.index = {data:null};
 	$scope.buildPhotoList = function()
 	{
 		$http.get("http://api.williamdunkerley.com/photography/featured")
@@ -89,6 +90,7 @@ function($scope, $http, $sce)
 		$("#photo-window").css("visibility", "visible");
 		$("#photo-window").fadeTo(400, 1);
 		$scope.photo.data = _photolist[_index].filepath;
+		$scope.index.data = _index;
 	}
 
 	$scope.deactivatePhotoWindow = function()
@@ -99,6 +101,27 @@ function($scope, $http, $sce)
 			$("#photo-window").css("visibility", "visible");
 		});
 		$scope.photo.data = "http://localhost/images/loading.svg";
+		$scope.index.data = -1;
+	}
+
+	$scope.changePhotoWindow = function(_next, _photolist)
+	{
+		$scope.photo.data = "http://localhost/images/loading.svg";
+		console.log($scope.photo.data);
+		if (_next)
+		{
+			$scope.photo.data = _photolist[($scope.index.data+1)%_photolist.length].filepath;
+			$scope.index.data = ($scope.index.data+1)%_photolist.length;
+		}
+		else
+		{
+			if ($scope.index.data == 0)
+			{
+				$scope.index.data = _photolist.length;
+			}
+			$scope.photo.data = _photolist[($scope.index.data-1)%_photolist.length].filepath;
+			$scope.index.data = ($scope.index.data-1)%_photolist.length;
+		}
 	}
 
 	$scope.trustUrl = function(_url)

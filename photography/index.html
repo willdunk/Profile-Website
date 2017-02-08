@@ -35,11 +35,11 @@
 			<div id="content-wrapper" ng-app="profileApp" ng-controller="PhotographyController">
 				<div id="photo-window">
 					<img id="exitfullsizeimage" class="icons" ng-click="deactivatePhotoWindow()" src="../images/icons/circle_delete.png">
-					<img id="backfullsizeimage" class="icons" src="../images/icons/arrow_left.png">
+					<img id="backfullsizeimage" class="icons" src="../images/icons/arrow_left.png" ng-click="changePhotoWindow(false, photolist.data)">
 
 					<img id="fullsizeimage" ng-src="{{photo.data}}">
 
-					<img id="nextfullsizeimage" class="icons" src="../images/icons/arrow_right.png">
+					<img id="nextfullsizeimage" class="icons" src="../images/icons/arrow_right.png" ng-click="changePhotoWindow(true, photolist.data)">
 				</div>
 				<div id="photography-wrapper" ng-init="buildPhotoList()">
 					<img ng-repeat="photo in photolist.data track by $index" ng-click="activatePhotoWindow($index, photolist.data)" ng-src="{{trustUrl(photo.thumbnail)}}">
