@@ -37,7 +37,8 @@
 					<img id="exitfullsizeimage" class="icons" ng-click="deactivatePhotoWindow()" src="../images/icons/circle_delete.png">
 					<img id="backfullsizeimage" class="icons" src="../images/icons/arrow_left.png" ng-click="changePhotoWindow(false, photolist.data)">
 
-					<img id="fullsizeimage" ng-src="{{photo.data}}">
+					<img id="fullsizeimage" ng-src="{{photo.data}}" imageonload>
+					<img id="loadingfullsizeimage" src="http://localhost/images/loading.svg">
 
 					<img id="nextfullsizeimage" class="icons" src="../images/icons/arrow_right.png" ng-click="changePhotoWindow(true, photolist.data)">
 				</div>

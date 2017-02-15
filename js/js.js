@@ -59,6 +59,21 @@ function shrink()
 
 var profileApp = angular.module('profileApp', []);
 
+profileApp.directive('imageonload', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('load', function() {
+               	$(element).show();
+               	$("#loadingfullsizeimage").hide();
+            });
+            // element.bind('error', function(){
+            //     alert('image could not be loaded');
+            // });
+        }
+    };
+});
+
 profileApp.controller("PhotographyController", ['$scope', '$http', '$sce', 
 function($scope, $http, $sce)
 {
@@ -86,11 +101,14 @@ function($scope, $http, $sce)
 
 	$scope.activatePhotoWindow = function(_index, _photolist)
 	{
+		$("#fullsizeimage").hide();
+		$("#loadingfullsizeimage").show();
 		$("#shadowbox").fadeTo(400, .90);
 		$("#photo-window").css("visibility", "visible");
 		$("#photo-window").fadeTo(400, 1);
 		$scope.photo.data = _photolist[_index].filepath;
 		$scope.index.data = _index;
+
 	}
 
 	$scope.deactivatePhotoWindow = function()
@@ -100,14 +118,12 @@ function($scope, $http, $sce)
 		{
 			$("#photo-window").css("visibility", "visible");
 		});
-		$scope.photo.data = "http://localhost/images/loading.svg";
-		$scope.index.data = -1;
 	}
 
 	$scope.changePhotoWindow = function(_next, _photolist)
 	{
-		$scope.photo.data = "http://localhost/images/loading.svg";
-		console.log($scope.photo.data);
+		$("#fullsizeimage").hide();
+		$("#loadingfullsizeimage").show();
 		if (_next)
 		{
 			$scope.photo.data = _photolist[($scope.index.data+1)%_photolist.length].filepath;
